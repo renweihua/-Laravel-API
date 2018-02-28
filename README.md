@@ -1,6 +1,6 @@
 # 基于Laravel的API服务端架构代码
 
-###借鉴地址：https://github.com/flc1125/ApiServer
+借鉴地址：https://github.com/flc1125/ApiServer
 
 [TOC]
 
@@ -30,6 +30,7 @@
 #### 2.1.1. 请求地址及请求方式
 
 > GET 请求地址：`/api`   API请求地址;
+
 > GET 请求地址：`/get_api_sign`   API的参数加密之后的sign返回;
 
 #### 2.1.2. 公共参数
