@@ -1,4 +1,4 @@
-# API服务端架构代码
+# 基于Laravel的API服务端架构代码
 
 ###借鉴地址：https://github.com/flc1125/ApiServer
 
