@@ -149,24 +149,15 @@ class Server
             $method_list = explode('/', $className);
             if (empty($method_list)) return $this->response(['status' => 0, 'code' => '100104']);
 
-            $return_list = $this->executeClassFunction($method_list);
-            if(empty($return_list['status'])) $return[$return_list['data_name']]['msg'] = $return_list['data'] ?? "";
-            else $return[$return_list['data_name']]['data'] = $return_list['data'] ?? [];
-            $return[$return_list['data_name']]['status'] = $return_list['status'] ?? 1;
-            $return[$return_list['data_name']]['code'] = $return_list['code'] ?? 200;
+            include_once __DIR__ .'/executeClassFunction.php';//控制器函数调用的引入
         } else {
             foreach ($classNameList as $key => $value) {
                 $method_list = explode('/', $value);
                 if (empty($method_list)) continue;
 
-                $return_list = $this->executeClassFunction($method_list);
-                if(empty($return_list['status'])) $return[$return_list['data_name']]['msg'] = $return_list['data'] ?? "";
-                else $return[$return_list['data_name']]['data'] = $return_list['data'] ?? [];
-                $return[$return_list['data_name']]['status'] = $return_list['status'] ?? 1;
-                $return[$return_list['data_name']]['code'] = $return_list['code'] ?? 200;
+                include_once __DIR__ .'/executeClassFunction.php';//控制器函数调用的引入
             }
         }
-        var_dump($return);exit;
         return ['status' => 1, 'code' => '200', 'return_time' => date('Y-m-d H:i:s'), 'data' => $return];
     }
 
