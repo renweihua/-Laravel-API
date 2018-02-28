@@ -39,7 +39,7 @@
 |----|----|----|----|
 |app_id|string|是|应用ID|
 |app_secret|string|是|密钥|
-|method|string|是|接口名称---可进行多个控制多个方法同时请求操作。例如：method=demo/bbb-ccc;Test/aaa;Test1/aaa（请求了 Demo控制器的bbb 和 ccc方法 、Test控制器的aaa方法）|
+|method|string|是|接口名称---可进行多个控制多个方法同时请求操作。例如：method=demo/bbb-ccc;Test/aaa;Test1/aaa（请求了 Demo控制器的bbb 和 ccc方法 、Test控制器的aaa方法、Test1控制器的aaa方法）|
 |format|string|否|回调格式，默认：json（目前仅支持）|
 |sign_method|string|否|签名类型/加密方式，默认：md5（支持md5加密、hash加密、openssl加密、base64、sha1）|
 |api_version|string|否|Api版本，默认：V1（可进行传参变更）|
