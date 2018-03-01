@@ -50,7 +50,7 @@ class Encryption
      */
     public function opensslEncrypt(string $string, string $key = self::OPENSSL_KEY, string $iv = self::OPENSSL_IV)
     {
-        return base64_encode(openssl_encrypt($string, self::OPENSSL_METHOD, $key, 0, $iv));
+        return strtoupper(base64_encode(openssl_encrypt($string, self::OPENSSL_METHOD, $key, 0, $iv)));
     }
 
     /**
@@ -77,7 +77,7 @@ class Encryption
      */
     public function generateMd5Sign($params)
     {
-        return md5(array_ksort_to_string($params));
+        return strtoupper(md5(array_ksort_to_string($params)));
     }
 
     /**
@@ -90,7 +90,7 @@ class Encryption
      */
     public function hashEncryption(string $string)
     {
-        return password_hash($string, PASSWORD_DEFAULT);
+        return strtoupper(password_hash($string, PASSWORD_DEFAULT));
     }
 
     /**

@@ -207,23 +207,12 @@ class Server
 
         $params_str = strtoupper(array_ksort_to_string($data));
         
-        if (strtoupper($sign) == $this->generateSign($data) && strtolower($this->sign_method) == 'md5') return array('status' => 1, 'code' => '200');
+        if (strtoupper($sign) == strtoupper($this->encryption->generateMd5Sign($params_str)) && strtolower($this->sign_method) == 'md5') return array('status' => 1, 'code' => '200');
         else if ($this->encryption->hashVerify($params_str, $sign) && strtolower($this->sign_method) == 'hash') return array('status' => 1, 'code' => '200');
-        else if (strtolower($this->sign_method) == 'openssl' && strtoupper($sign) == $this->encryption->opensslEncrypt($params_str)) return array('status' => 1, 'code' => '200');
+        else if (strtolower($this->sign_method) == 'openssl' && strtoupper($sign) == strtoupper($this->encryption->opensslEncrypt($params_str))) return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'base64' && strtoupper($sign) == strtoupper(base64_encode($params_str))) return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'sha1' && strtoupper($sign) == strtoupper(sha1($params_str))) return array('status' => 1, 'code' => '200');
         return array('status' => 0, 'code' => '100108');
-    }
-
-    /**
-     * 生成签名
-     * @param  array $params 待校验签名参数
-     * @return string|false
-     */
-    protected function generateSign($params)
-    {
-        if (strtolower($this->sign_method) == 'md5') return $this->encryption->generateMd5Sign($params);
-        return false;
     }
 
     /**
