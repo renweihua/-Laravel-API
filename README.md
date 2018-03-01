@@ -31,7 +31,7 @@
 
 > GET 请求地址：`/api`   API请求地址;
 
-> GET 请求地址：`/get_api_sign`   API的参数加密之后的sign返回;
+> GET 请求地址：`/get_api_sign`   API的参数加密之后的sign返回。（前端加密的函数正在写，到时候也会发布出来）
 
 #### 2.1.2. 公共参数
 
