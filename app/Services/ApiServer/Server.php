@@ -51,7 +51,7 @@ class Server
      * Api版本
      * @var string
      */
-    protected $api_version = 'V1';
+    public $api_version = 'V1';
     
     /**
      * 是否输出错误码
@@ -125,7 +125,7 @@ class Server
         $this->params['sign_method'] = !empty($this->params['sign_method']) ? $this->params['sign_method'] : $this->sign_method;//签名类型
         $this->params['api_version'] = !empty($this->params['api_version']) ? $this->params['api_version'] : $this->api_version;//api版本
         $this->api_version = $this->params['api_version'];//两者需要保持一致，其他方法需要使用版本来找控制器的路径
-        $this->app_id = $this->params['app_id'];
+        $this->app_id = $this->params['app_id'] ?? $this->params['data']['app_id'];
         $this->method = $this->params['method'];
 
 
@@ -193,15 +193,21 @@ class Server
      */
     protected function checkSign($params_ary)
     {
-        $sign = array_key_exists('sign', $params_ary) ? $params_ary['sign'] : '';
+        $data['app_id'] = $params_ary['app_id'] ?? '';
+        $data['app_secret'] = $params_ary['app_secret'] ?? '';
+        $data['method'] = $params_ary['method'] ?? '';
+        $data['sign_method'] = $params_ary['sign_method'] ?? $encryption->sign_method;
+        $data['api_version'] = $params_ary['api_version'] ?? $this->api_version;
+        $data['sign'] = $params_ary['sign'] ?? '';
+        $sign = array_key_exists('sign', $data) ? $data['sign'] : '';
 
         if (empty($sign)) return array('status' => 0, 'code' => '100107');
 
-        unset($params_ary['sign']);
+        unset($data['sign']);
 
-        $params_str = array_ksort_to_string($params_ary);
-
-        if (strtoupper($sign) == $this->generateSign($params_ary) && strtolower($this->sign_method) == 'md5') return array('status' => 1, 'code' => '200');
+        $params_str = strtoupper(array_ksort_to_string($data));
+        
+        if (strtoupper($sign) == $this->generateSign($data) && strtolower($this->sign_method) == 'md5') return array('status' => 1, 'code' => '200');
         else if ($this->encryption->hashVerify($params_str, $sign) && strtolower($this->sign_method) == 'hash') return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'openssl' && strtoupper($sign) == $this->encryption->opensslEncrypt($params_str)) return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'base64' && strtoupper($sign) == strtoupper(base64_encode($params_str))) return array('status' => 1, 'code' => '200');
