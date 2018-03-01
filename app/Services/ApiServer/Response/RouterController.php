@@ -46,7 +46,7 @@ class RouterController extends Controller
 
         unset($params);
 
-        if(!in_array(strtolower($data_get['sign_method']), $encryption::SIGN_METHOD)) return ['status' => 0, 'code' => 404, 'data' => '加密方式 {'.strtolower($data_get['sign_method']).'} 未找到！'];
+        if(!in_array(strtolower($data_get['sign_method']), $encryption::SIGN_METHOD)) return ['status' => 0, 'code' => 404, 'msg' => '加密方式 {'.strtolower($data_get['sign_method']).'} 未找到！'];
 
         unset($data_get['sign']);
         $params_str = strtoupper(array_ksort_to_string($data_get));

@@ -64,6 +64,15 @@ function del_cache($key)
 
 /***************    缓存函数    结束    ***************/
 
+/**
+ * [array_ksort_to_string]
+ * @author:cnpscy <[2278757482@qq.com]>
+ * @chineseAnnotation:数组升序转成字符串
+ * @englishAnnotation:
+ * @version:1.0
+ * @param              [type] $data [description]
+ * @return             [type]       [description]
+ */
 function array_ksort_to_string($data){
 	if(is_string($data)) return $data;
     ksort($data);

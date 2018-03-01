@@ -199,16 +199,18 @@ class Server
         $data['sign_method'] = $params_ary['sign_method'] ?? $encryption->sign_method;
         $data['api_version'] = $params_ary['api_version'] ?? $this->api_version;
         $data['sign'] = $params_ary['sign'] ?? '';
-        $sign = array_key_exists('sign', $data) ? $data['sign'] : '';
+        $sign = strtoupper(array_key_exists('sign', $data) ? $data['sign'] : '');
 
         if (empty($sign)) return array('status' => 0, 'code' => '100107');
+
+        $sign_oupper = array_key_exists('sign', $data) ? $data['sign'] : '';
 
         unset($data['sign']);
 
         $params_str = strtoupper(array_ksort_to_string($data));
-        
+
         if (strtoupper($sign) == strtoupper($this->encryption->generateMd5Sign($params_str)) && strtolower($this->sign_method) == 'md5') return array('status' => 1, 'code' => '200');
-        else if ($this->encryption->hashVerify($params_str, $sign) && strtolower($this->sign_method) == 'hash') return array('status' => 1, 'code' => '200');
+        else if ($this->encryption->hashVerify($params_str, $sign_oupper) && strtolower($this->sign_method) == 'hash') return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'openssl' && strtoupper($sign) == strtoupper($this->encryption->opensslEncrypt($params_str))) return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'base64' && strtoupper($sign) == strtoupper(base64_encode($params_str))) return array('status' => 1, 'code' => '200');
         else if (strtolower($this->sign_method) == 'sha1' && strtoupper($sign) == strtoupper(sha1($params_str))) return array('status' => 1, 'code' => '200');

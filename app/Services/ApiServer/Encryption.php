@@ -90,7 +90,7 @@ class Encryption
      */
     public function hashEncryption(string $string)
     {
-        return strtoupper(password_hash($string, PASSWORD_DEFAULT));
+        return password_hash($string, PASSWORD_DEFAULT);
     }
 
     /**
