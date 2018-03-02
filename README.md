@@ -136,8 +136,10 @@
 
 ### 2.3. API DEMO 示例
 > 文件路径：`app/Http/Controllers/Api/Demo.php`
+
 > 打开首页，会默认请求，打开控制器查看便好。
+
 > 如果你是通过手机端，那么进入数据库，更改：
-&nbsp;&nbsp;&nbsp;&nbsp; domain_name 为 你的域名
-&nbsp;&nbsp;&nbsp;&nbsp; 或者
-&nbsp;&nbsp;&nbsp;&nbsp; request_browser_ip 你访问的IP
+&nbsp;&nbsp;&nbsp;&nbsp; domain_name 为 你的域名 <br>
+&nbsp;&nbsp;&nbsp;&nbsp; 或者<br>
+&nbsp;&nbsp;&nbsp;&nbsp; request_browser_ip 你访问的IP<br>
