@@ -107,7 +107,7 @@
 ```
 
 
-## 错误码配置：`app/Services/ApiServer/Error.php`
+##2.2 错误码配置：`app/Services/ApiServer/Error.php`
 
 现有错误码：
 
@@ -134,5 +134,5 @@
 |100114|你是PC端，未授予权限请求接口！
 
 
-#### 2.2.3. API DEMO 示例
+## 2.3. API DEMO 示例
 文件路径：`app/Http/Controllers/Api/Demo.php`
