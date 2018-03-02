@@ -1,0 +1,84 @@
+table img {
+    max-width: 50px;
+    max-height: 50px;
+}
+
+table tr, table td {
+    line-height: 50px !important;
+    cursor: -webkit-grabbing;
+}
+
+.text-center, .text_center {
+    text-align: center;
+}
+
+.text-left, .text_left {
+    text-align: left;
+}
+
+.text-right, .text_right {
+    text-align: right;
+}
+
+.display-none, .display_none {
+    display: none;
+}
+
+.display-block, .display_block {
+    display: block;
+}
+
+.float-right, .float_right {
+    float: right;
+}
+
+.float-left, .float_left {
+    float: left;
+}
+
+.clear-both, .clear-both {
+    clear: both;
+}
+
+.margin-top-50, .margin_top_50 {
+    margin-top: 50px;
+}
+
+.margin-bootom-10, .margin_bootom_10 {
+    margin-bottom: 10px;
+}
+
+.min-height-10-rem, .min_height_10_rem {
+    min-height: 10rem;
+}
+
+.drop-down {
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.position-relative, .position_relative {
+    position: relative;
+}
+
+.nav-list > li > .submenu li > .submenu > li > a > .arrow {
+    right: 12px;
+    top: 9px;
+}
+
+.nav-list > li > .submenu a > .arrow {
+    right: 11px;
+    top: 10px;
+    font-size: 16px;
+    color: #6b828e;
+}
+
+/*************	菜单栏目	开始	****************/
+.menu_list table td b.drop_down_absolute, .room_type_list table td b.drop_down_absolute {
+    text-align: right;
+    position: absolute;
+    right: 10%;
+    top: 40%;
+}
+
