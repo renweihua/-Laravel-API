@@ -2,7 +2,7 @@
 
 我的博客园：<a href="http://www.clownpy.cc"  target="_blank">小丑疯狂吧</a>
 
-借鉴地址：https://github.com/flc1125/ApiServer
+借鉴地址：http://flc.ren/2016/08/549.html
 
 [TOC]
 
