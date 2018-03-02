@@ -8,26 +8,27 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
         <script src="{{asset('js/md5.js')}}"></script>
-        <script src="{{asset('js/base64.js')}}"></script>
-        <script src="{{asset('js/sha1.js')}}"></script>
         <script src="{{asset('js/cnpscy.function.js')}}"></script>
         <script src="{{asset('js/cnpscy.common.js')}}"></script>
         
         <script type="text/javascript">
-            var webTitle = '小丑疯狂吧';
+            var webTitle = '小丑直播平台';
             webTitle = [webTitle, 'text-align:center;'];
 
-            window.onload = function(){
+
+            $(function(){
+                console.log(API_DATA.sign_method);
+                API_DATA.sign = $.md5(arraySortToString(aaa)).toUpperCase();
                 myAjax({
                     'data': API_DATA,
                     'callback': function (data) {
                         console.log(data);
                     }
                 });
-            }
+            })
         </script>
 
         <!-- Styles -->
