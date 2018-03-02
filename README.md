@@ -1,6 +1,6 @@
 # 基于Laravel的API服务端架构代码
 
-我的博客园：http://www.clownpy.cc
+我的博客园：<a href="http://www.clownpy.cc"  target="_blank">小丑疯狂吧</a>
 
 借鉴地址：https://github.com/flc1125/ApiServer
 
