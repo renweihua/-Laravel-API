@@ -51,7 +51,7 @@
 
 #### 2.1.3. api_token 与 app_secret
 
-> 如果接口中存在 api_token，默认会先进行 app_id 与 api_token 进行检测，
+> 如果接口中存在 api_token，默认会先进行 app_id 与 api_token 进行检测，<br>
  检测成功：调取接口数据
  检测失败：进行 app_id 与 app_secret 进行认证：
           如果成功，调取接口数据；
