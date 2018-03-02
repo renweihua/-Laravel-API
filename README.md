@@ -33,7 +33,7 @@
 
 > GET 请求地址：`/api`   API请求地址;
 
-> GET 请求地址：`/get_api_sign`   API的参数加密之后的sign返回。（前端加密的函数正在写，到时候也会发布出来）
+> GET 请求地址：`/get_api_sign`   API的参数加密之后的 sign 和 api_token 返回。（前端加密的函数正在写，到时候也会发布出来）
     除了 hash 加密，其余 加密返回的 sign 全部大写。
 
 #### 2.1.2. 公共参数
@@ -41,21 +41,26 @@
 |参数名|类型|是否必须|描述|
 |----|----|----|----|
 |app_id|string|是|应用ID|
-|app_secret|string|是|密钥|
+|app_secret|string|app_secret 与 api_token 至少存在一个参数|密钥|
+|api_token|string|app_secret 与 api_token 至少存在一个参数|Api接口请求的token验证（默认存储时间为 10分钟）|
 |method|string|是|接口名称---可进行多个控制多个方法同时请求操作。例如：method=demo/bbb-ccc;Test/aaa;Test1/aaa（请求了 Demo控制器的bbb 和 ccc方法 、Test控制器的aaa方法、Test1控制器的aaa方法）|
 |format|string|否|回调格式，默认：json（目前仅支持）|
 |sign_method|string|否|签名类型/加密方式，默认：md5（支持md5加密、hash加密、openssl加密、base64、sha1）|
 |api_version|string|否|Api版本，默认：V1（可进行传参变更）|
 |sign|string|是|签名字符串，参考[签名规则](#签名规则)|
 
-#### 2.1.3. 签名规则
+#### 2.1.3. api_token 与 app_secret
 
-- 对所有API请求参数（包括公共参数和请求参数，但除去`sign`参数），根据参数名称的ASCII码表的顺序排序。如：`foo=1, bar=2, foo_bar=3, foobar=4`排序后的顺序是`bar=2, foo=1, foo_bar=3, foobar=4`。
-- 将排序好的参数名和参数值拼装在一起，根据上面的示例得到的结果为：bar2foo1foo_bar3foobar4。
-- 把拼装好的字符串采用utf-8编码，使用签名算法对编码后的字节流进行摘要。如果使用`MD5`算法，则：md5(secret+bar2foo1foo_bar3foobar4+secret)
-- 将摘要得到的字节结果使用大写表示
+> 如果接口中存在 api_token，默认会先进行 app_id 与 api_token 进行检测，
+ 检测成功：调取接口数据
+ 检测失败：进行 app_id 与 app_secret 进行认证：
+          如果成功，调取接口数据；
+          否则，返回提示信息
+> 如果不存在 api_token， 那么直接进行 app_id 与 app_secret 进行认证：
+          如果成功，调取接口数据；
+          否则，返回提示信息
 
-#### 2.1.5. 返回结果
+#### 2.1.4. 返回结果
 
 ```json
 
@@ -99,7 +104,7 @@
     }
 }
 
-> 错误码配置：`app/Services/ApiServer/Error.php`
+## 错误码配置：`app/Services/ApiServer/Error.php`
 
 现有错误码：
 
@@ -110,20 +115,20 @@
 |401|无此权限|
 |404|未找到|
 |500|服务器异常|
-|100101|【app_id】 丢失|
-|100102|【app_id】 不存在|
-|100103|【app_id】 无权限
-|100104|【method】 丢失
-|100105|【format】 错误
-|100106|【sign_method】 错误
-|100107|【sign】 缺失
-|100108|【sign】 签名错误
-|100109|【method】 方法不存在
-|100110|【api_version】 版本丢失！
-|100111|【app_secret】 丢失
-|100112|【app_secret】 必须为字符串
-|100113|【app_secret】 长度必须为1-32位
-|100114|【app_id】与【app_secret】 不匹配
+|100101|【app_id】 不可为空！
+|100102|【app_id】 无权限！
+|100103|【method】 不可为空！
+|100104|【method】 方法不存在！
+|100105|【format】 错误！
+|100106|【sign_method】 错误！
+|100107|【sign】 缺失！
+|100108|【sign】 签名错误！
+|100109|【app_secret】 不可为空！
+|100110|【app_id】与【app_secret】 不匹配！
+|100111|【api_token】 不可为空！
+|100112|【app_secret】与【api_token】 不可同时为空！
+|100113|【api_token】 已失效！
+|100114|你是PC端，未授予权限请求接口！
 
 
 #### 2.2.3. API DEMO 示例
