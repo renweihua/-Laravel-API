@@ -43,6 +43,7 @@ class RouterController extends Controller
         $data_get['sign_method'] = $params['sign_method'] ?? $encryption->sign_method;
         $data_get['api_version'] = $params['api_version'] ?? $server->api_version;
         $data_get['sign'] = $params['sign'] ?? '';
+        $data_get['api_token'] = $params['api_token'] ?? ( $server->api_token ?? '');
 
         unset($params);
 
@@ -51,10 +52,10 @@ class RouterController extends Controller
         unset($data_get['sign']);
         $params_str = strtoupper(array_ksort_to_string($data_get));
 
-        if(empty($data_get['sign_method']) || strtolower($data_get['sign_method']) == 'md5') return ['status' => 1, 'code' => 200, 'data' => $encryption->generateMd5Sign($params_str), 'str' => $params_str];
-        else if(strtolower($data_get['sign_method']) == 'hash') return ['status' => 1, 'code' => 200, 'data' => $encryption->hashEncryption($params_str), 'str' => $params_str];
-        else if(strtolower($data_get['sign_method']) == 'openssl') return ['status' => 1, 'code' => 200, 'data' => $encryption->opensslEncrypt($params_str), 'str' => $params_str];
-        else if(strtolower($data_get['sign_method']) == 'base64') return ['status' => 1, 'code' => 200, 'data' => base64_encode($params_str), 'str' => $params_str];
-        else if(strtolower($data_get['sign_method']) == 'sha1') return ['status' => 1, 'code' => 200, 'data' => sha1($params_str), 'str' => $params_str];
+        if(empty($data_get['sign_method']) || strtolower($data_get['sign_method']) == 'md5') return ['status' => 1, 'code' => 200, 'sign' => $encryption->generateMd5Sign($params_str), 'api_token' => $server->getSignSuccessSetCache($data_get['app_id'])];
+        else if(strtolower($data_get['sign_method']) == 'hash') return ['status' => 1, 'code' => 200, 'sign' => $encryption->hashEncryption($params_str), 'api_token' => $server->getSignSuccessSetCache($data_get['app_id'])];
+        else if(strtolower($data_get['sign_method']) == 'openssl') return ['status' => 1, 'code' => 200, 'sign' => $encryption->opensslEncrypt($params_str), 'api_token' => $server->getSignSuccessSetCache($data_get['app_id'])];
+        else if(strtolower($data_get['sign_method']) == 'base64') return ['status' => 1, 'code' => 200, 'sign' => base64_encode($params_str), 'api_token' => $server->getSignSuccessSetCache($data_get['app_id'])];
+        else if(strtolower($data_get['sign_method']) == 'sha1') return ['status' => 1, 'code' => 200, 'sign' => sha1($params_str), 'api_token' => $server->getSignSuccessSetCache($data_get['app_id'])];
     }
 }

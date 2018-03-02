@@ -16,7 +16,7 @@ class Demo extends Common
 
     public static function aaa()
     {
-        return [ 'status' => 1, 'function' => 'Demo类中的aaa方法', 'code' => '200', 'data' => ['123123'] ];
+        return [ 'status' => 1, 'function' => 'Demo类中的aaa方法', 'code' => '200', 'data' => [] ];
     }
 
     public function bbb()

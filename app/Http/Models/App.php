@@ -23,7 +23,7 @@ class App extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'app_id', 'app_secret', 'app_name', 'app_desc', 'status', 'ip', 'browser_type', 'add_time'
+        'id', 'app_id', 'app_secret', 'app_name', 'app_desc', 'status', 'ip', 'browser_type', 'add_time', 'request_browser_ip', 'domain_name'
     ];
 
 }
