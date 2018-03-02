@@ -104,6 +104,8 @@
         }
     }
 }
+```
+
 
 ## 错误码配置：`app/Services/ApiServer/Error.php`
 
