@@ -37,12 +37,12 @@
     除了 hash 加密，其余 加密返回的 sign 全部大写。
 
 #### 2.1.2. 公共参数
-
+##### app_secret 与 api_token 至少存在一个参数
 |参数名|类型|是否必须|描述|
 |----|----|----|----|
 |app_id|string|是|应用ID|
-|app_secret|string|app_secret 与 api_token 至少存在一个参数|密钥|
-|api_token|string|app_secret 与 api_token 至少存在一个参数|Api接口请求的token验证（默认存储时间为 10分钟）|
+|app_secret|string|否|密钥|
+|api_token|string|否|Api接口请求的token验证（默认存储时间为 10分钟）|
 |method|string|是|接口名称---可进行多个控制多个方法同时请求操作。例如：method=demo/bbb-ccc;Test/aaa;Test1/aaa（请求了 Demo控制器的bbb 和 ccc方法 、Test控制器的aaa方法、Test1控制器的aaa方法）|
 |format|string|否|回调格式，默认：json（目前仅支持）|
 |sign_method|string|否|签名类型/加密方式，默认：md5（支持md5加密、hash加密、openssl加密、base64、sha1）|
