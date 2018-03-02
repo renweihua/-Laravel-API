@@ -55,7 +55,7 @@ class App
         
         $cache_key = $this->cache_key_prefix . $this->app_id;
 
-        // if (has_cache($cache_key)) return get_cache($cache_key);
+        if (has_cache($cache_key)) return get_cache($cache_key);
 
         $app = AppModel::where(['app_id' => $this->app_id])->first();
 
