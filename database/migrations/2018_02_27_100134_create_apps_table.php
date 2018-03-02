@@ -21,6 +21,8 @@ class CreateAppsTable extends Migration
             $table->string('app_name', 255)->default('')->comment('app名称')->unique();
             $table->string('app_desc', 255)->default('')->comment('描述');
             $table->boolean('status')->unsigned()->default(1)->comment('状态：0：禁用；1：可用');
+            $table->string('domain_name', 255)->default('')->comment('如果是PC浏览器请求，那么网址是多少');
+            $table->string('request_browser_ip', 255)->default('')->comment('如果是PC浏览器请求，那么网址的IP是多少');
             $table->integer('ip')->default(0)->unsigned()->comment('创建时的IP');
             $table->text('browser_type')->nullable()->comment('创建时浏览器类型');
             $table->integer('add_time')->default(0)->unsigned()->comment('创建时的时间');
